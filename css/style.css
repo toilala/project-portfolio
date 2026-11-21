@@ -510,3 +510,29 @@ body:before{content:"";position:fixed;z-index:30;top:0;left:0;width:var(--scroll
   .sheet-curl{right:-45px;bottom:6%;width:160px;height:95px}
   .margin-tab{right:4%;bottom:28px;width:138px}
 }
+
+
+/* field notes */
+.notes-list{display:grid;gap:45px;margin-top:65px;padding-top:30px;border-top:3px solid var(--ink)}
+.note-card{position:relative;display:block;padding:35px 32px 55px;border:3px solid var(--ink);box-shadow:8px 9px 0 var(--ink);background:var(--paper2);text-decoration:none;color:inherit;transform:rotate(-1deg);transition:transform .3s ease,box-shadow .3s ease}
+.note-card:nth-child(2n){transform:rotate(1.2deg);background:#e8d8a9}
+.note-card:hover{transform:rotate(0) translateY(-4px);box-shadow:12px 13px 0 var(--red)}
+.note-card h3{font:700 clamp(26px,3.6vw,44px)/.95 var(--block);letter-spacing:-.08em;margin:0 0 18px}
+.note-card .note-code{margin-bottom:16px}
+.note-card p{font:19px/1.35 var(--hand);max-width:560px;margin:0}
+.note-card .read-mark{position:absolute;right:22px;bottom:16px;font:15px var(--hand);color:var(--red);transform:rotate(-3deg)}
+.notes-empty{margin-top:70px;font:19px var(--hand);color:var(--muted);transform:rotate(-2deg)}
+.notes-empty b{color:var(--red)}
+
+/* reading a note */
+.post-sheet .intro{max-width:600px}
+.post-meta{display:flex;gap:18px;flex-wrap:wrap;align-items:center;margin:26px 0 0;font:12px var(--mono);color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+.post-meta b{color:var(--red);font-weight:400}
+.post-body{max-width:640px;margin-top:60px}
+.post-body p{font:19px/1.6 var(--comic);margin:0 0 28px}
+.post-body h2{font:700 clamp(24px,3vw,36px)/1 var(--block);letter-spacing:-.06em;margin:65px 0 24px;transform:rotate(-1deg)}
+.post-body h2:before{content:"// ";color:var(--red);font-family:var(--hand);font-weight:400;font-size:.8em}
+.post-nav{display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap;margin-top:80px;padding-top:26px;border-top:3px solid var(--ink);font:17px var(--hand)}
+.post-nav a{color:var(--red);text-decoration:underline;text-decoration-style:wavy}
+.post-end{font:22px var(--hand);color:var(--red);transform:rotate(-2deg);text-align:center;margin-top:60px}
+@media(max-width:760px){.post-body p{font-size:17px}.note-card{padding:28px 22px 50px}}
