@@ -57,7 +57,7 @@ themeToggle?.addEventListener('click', () => {
   syncThemeToggle();
 });
 
-const liveTime = document.querySelector('.live-time');
+const liveTime = document.querySelector('.live-time, .live-tim');
 const boardTime = document.querySelector('.board-time');
 const updateLiveTime = () => {
   const now = new Date();
