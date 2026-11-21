@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="I stopped waiting on my own computer and let GitHub build my Android app instead. A field note by Nischal Koirala.">
+  <title>How My Slow Old Computer Got Me Into GitHub Actions | field notes</title>
+  <meta property="og:title" content="How My Slow Old Computer Got Me Into GitHub Actions">
+  <meta property="og:description" content="I stopped waiting on my own computer and let GitHub build my Android app instead.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://toilala.vercel.app/notes/slow-computer-github-actions.html">
+  <meta name="theme-color" content="#f1eadb">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&family=Comic+Neue:wght@400;700&family=DM+Mono:wght@400;500&family=Gloria+Hallelujah&family=Kalam:wght@400;700&family=Patrick+Hand&family=Rock+Salt&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body class="paper-page"><div class="page-noise"></div><header class="masthead wrap"><a class="brand" href="../index.html"><span class="brand-mark">BK</span><span><b>BRIHASPATI</b><small>KOIRALA</small></span></a><p class="header-note">FIELD NOTE <b>001 / WRITING</b><br><span>NISCHAL KOIRALA</span></p><nav class="nav" aria-label="Main navigation"><a href="../index.html"><svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 11.5 12 5l8 6.5v7a1 1 0 0 1-1 1h-5v-5h-4v5H5a1 1 0 0 1-1-1z"/></svg><i>01</i> home</a><a href="../about.html"><svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="3.2"/><path d="M5.5 19c.6-3.1 2.8-4.8 6.5-4.8s5.9 1.7 6.5 4.8"/></svg><i>02</i> about</a><a href="../contact.html"><svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="6" width="16" height="12" rx="1"/><path d="m5 7 7 6 7-6"/></svg><i>03</i> contact</a><a class="is-active" href="../notes.html"><svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h9l4 4v14H6z"/><path d="M14 3v5h5M9.5 13h6M9.5 17h4"/></svg><i>04</i> notes</a></nav><button class="theme-toggle" type="button" aria-label="Switch to dark mode"><span>&#9789;</span><b>dark</b></button><button class="menu-toggle" aria-label="Open navigation" aria-expanded="false"><i></i><i></i></button></header>
+<main class="sheet post-sheet wrap reveal">
+  <p class="eyebrow">field note 01 / github actions</p>
+  <h1 style="font-size:clamp(38px,6vw,84px);line-height:.9">How My Slow Old Computer<br><em>Got Me Into GitHub Actions</em></h1>
+  <p class="intro">I stopped waiting on my own computer and let GitHub build my Android app instead.</p>
+  <p class="post-meta"><span>by <b>Nischal Koirala</b></span><span>nov 2026</span><span>about 6 min</span></p>
+  <div class="sheet-margin" aria-hidden="true"><span class="sheet-scrap scrap-note">NOTE<br>01</span><span class="sheet-pencil">first one on the page</span><svg class="sheet-curl" viewBox="0 0 220 130"><path d="M8 102 C42 22 89 18 105 63 S160 126 210 37"/></svg></div>
+  <div class="post-body">
+      <p>For a long time, I used GitHub for one thing: keeping my code. It also kept a history of my changes, so if I broke something, I could go back to a version that worked. That was all I did and wanted from it. Around that familiar routine sat tabs and settings with names like Actions, workflows, and runners. They looked important. They also looked like things I could safely leave to people who knew more than I did.</p>
+      <p>That changed when I started building oris, an Android music app. An Android app has to be built using a computer before you can install it in your phone, and I had to do that again and again to check whether my bug fixes worked. My computer is a little unfit for that kind of job. It can do it, but repeating it over and over became a hassle. Building my app locally took ages and failed far more often than it worked, and every time I was praying it would not run out of CPU or memory halfway. I spent a lot of evenings reading Gradle logs and hoping the next attempt would finish.</p>
+      <h2>Finding out what the Actions tab does</h2>
+      <p>After enough playing around, I started digging around to see if there was a better way. That is how I found GitHub Actions. I had no idea GitHub could give me a computer to run a build on. You write down a list of steps, and GitHub runs them on one of its machines when something you choose happens, like a push, or when you start the workflow manually.</p>
+      <p>For my app, those steps fetch the code, set up Java, build the app and run its unit tests. If the build succeeds, I get an APK, the file you install on an Android phone, which I can download from the run page. I think of it as my unpaid intern. I wrote the instructions once, and now it runs the build for me on a machine much faster than mine, without complaining.</p>
+      <p>It does not fix my mistakes, though. If the code is broken, the build still fails, and I still have to read the logs and that&#x27;s expected. The difference is that I no longer have to rely on my computer to get a build done.</p>
+      <p>GitHub calls a set of instructions like this a workflow, and it can run automatically, so I never have to repeat those steps by hand.</p>
+      <h2>The words are the hard part</h2>
+      <p>Most of what put me off Actions was the vocabulary. A workflow is a set of instructions saved in a YAML file inside the .github/workflows folder in your repository. It starts when something happens, like a push, or when you run it manually. A workflow contains jobs. Each job runs on a runner, the machine doing the work, and contains a list of steps. Those were the words I needed to get started.</p>
+      <p>One thing I had to learn is that the machines used by my workflows are temporary. Each job gets a fresh one, and it is discarded afterwards. If I want to download a file after the job finishes, I have to save it as an artifact. That is how the oris APK gets to me. Artifacts do not last forever either: my workflows keep debug APKs for 14 days and release APKs for 7.</p>
+      <h2>Why my app has four workflows</h2>
+      <p>Over time, my app (oris) ended up with four workflows. One builds the app and runs the unit tests. One runs it in an emulator to check playback. One makes a signed release build and only publishes a release if I turn on the publish option when I start it. The last builds a signed release APK and launches it in an emulator for a quick smoke test. That last check is separate; it does not automatically stop the release workflow from publishing.</p>
+      <p>The signing key worried me too. A release APK needs to be signed, but I did not want to put a private key in a public repository. The release workflow reads the key and its passwords from GitHub Actions secrets instead of keeping them in the workflow file. Someone reading that file can see the secret names, not their values. That answered my initial worry, but it is not a reason to stop being careful: the workflow can access those secrets, so I still need to be careful about what code it runs and what it writes to logs.</p>
+      <h2>Is it really free?</h2>
+      <p>For the standard GitHub hosted runners I use with oris, yes. GitHub&#x27;s documentation says those runners are free for public repositories, and oris is open source. Private repositories get an included amount of compute usage and storage based on the account&#x27;s plan, with charges for additional usage. Larger runners cost extra, even for public repositories. There are usage limits too, so it is worth checking the current terms before relying on it.</p>
+      <p>For a project like mine, that means I can run builds, get the APKs and read the logs without paying for a more powerful computer just to build the app. That was a much more useful discovery than I expected from a tab I had been ignoring.</p>
+      <h2>If you have been avoiding the tab too</h2>
+      <p>Pick one boring thing you already do by hand, like building your app or running your tests, and set it up in Actions. You do not need four workflows to start. You will pick up the words as you go. I still have plenty to learn, but my builds which I have to do 10s of times a day no longer depend on my old computer, and that alone was worth opening the tab.</p>
+  </div>
+  <p class="post-end">end of note 01.</p>
+  <div class="post-nav"><a href="../notes.html">&larr; all field notes</a><a href="../contact.html">argue with it &rarr;</a></div>
+</main><footer class="footer wrap"><span>BK / field note 001 / writing</span><span>written between builds</span><a href="../notes.html">more notes &rarr;</a></footer><script src="../js/main.js"></script></body></html>
